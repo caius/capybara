@@ -14,12 +14,18 @@ class Capybara::Driver::Culerity < Capybara::Driver::Celerity
 
   def browser
     unless @_browser
-      @_browser = ::Culerity::RemoteBrowserProxy.new self.class.server, {:browser => :firefox, :log_level => :off}
+      @_browser = ::Culerity::RemoteBrowserProxy.new self.class.server, self.browser_options
       at_exit do
         @_browser.exit
       end
     end
     @_browser
+  end
+
+  protected
+  
+  def browser_options
+    {:browser => :firefox, :log_level => :off}.merge(Capybara.culerity_driver_options)
   end
 
 end

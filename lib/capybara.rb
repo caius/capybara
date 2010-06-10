@@ -15,6 +15,7 @@ module Capybara
   class << self
     attr_accessor :debug, :asset_root, :app_host, :run_server, :default_host
     attr_accessor :default_selector, :default_wait_time, :ignore_hidden_elements
+    attr_accessor :culerity_driver_options
 
     def default_selector
       @default_selector ||= :xpath
@@ -22,6 +23,11 @@ module Capybara
     
     def default_wait_time
       @default_wait_time ||= 2
+    end
+
+    # Options that are passed to Culerity::Browser.new
+    def culerity_driver_options
+      @culerity_driver_options ||= {}
     end
 
     def log(message)
