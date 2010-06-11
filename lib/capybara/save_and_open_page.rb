@@ -4,6 +4,7 @@ module Capybara
 
     def save_and_open_page(html)
       name="capybara-#{Time.new.strftime("%Y%m%d%H%M%S")}.html"
+      name = "tmp/#{name}" if File.directory?("tmp")
 
       FileUtils.touch(name) unless File.exist?(name)
 
